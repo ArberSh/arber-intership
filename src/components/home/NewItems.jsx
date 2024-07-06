@@ -67,15 +67,9 @@ const NewItems = () => {
     setLoading(false)
   }
   NewItemsData()
-  Time()
+
   },[])
 
-  function Time(){
-    GetData.map(elem => {
-      const time = Date.now(elem.expiryDate)
-      console.log(time /1000 /60 /24 + "hi")
-    })
-}
 
    
   
