@@ -37,23 +37,39 @@ const ExploreItems = () => {
     
   }, [value]);
 
+  useEffect(() => {
+    setNewGetData([]);
+    setLoadMore(8);
+    setDisplay(true);
+  }, [value]);
+
+
     function ChangeValue(e){
     setValue(e)
   }
   
+  // useEffect(()=>{
+  //   function Test(){
+  //   getdata.map((elem) => {elem.id >= LoadMore
+  //     console.log(elem)
+  //   })
+  //   }
+  //   Test()
+  // },[value,LoadMore])
 
-  
 
   useEffect(() => {
-    setNewGetData((prevData) => {
-      const newData = [...prevData, ...getdata.slice(prevData.length, LoadMore)];
-      return newData;
-    });
-  }, [getdata, LoadMore]);
+      setNewGetData((prevData) => {
+          const newData = [...prevData, ...getdata.slice(prevData.length, LoadMore)];
+        console.log(newData)
+        console.log(LoadMore)
+        return newData;
+      });
+    
+   
+  }, [getdata,LoadMore]);
 
-  useEffect(() => {
-    console.log(newgetdata);
-  }, [newgetdata]);
+
 
   function ClickLoadMore() {
     setLoadMore((number) => number + 4);
