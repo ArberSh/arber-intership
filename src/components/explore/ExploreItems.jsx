@@ -41,21 +41,13 @@ const ExploreItems = () => {
     setNewGetData([]);
     setLoadMore(8);
     setDisplay(true);
+    setLoading(true)
   }, [value]);
 
 
     function ChangeValue(e){
     setValue(e)
   }
-  
-  // useEffect(()=>{
-  //   function Test(){
-  //   getdata.map((elem) => {elem.id >= LoadMore
-  //     console.log(elem)
-  //   })
-  //   }
-  //   Test()
-  // },[value,LoadMore])
 
 
   useEffect(() => {
