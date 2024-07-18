@@ -8,6 +8,7 @@ import axios from "axios";
 const ItemDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    //Any Comment
   }, []);
 
   const [loading,setLoading] = useState(true)
