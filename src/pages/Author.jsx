@@ -10,13 +10,16 @@ const Author = () => {
   const [getdata,setGetData] = useState([])
   const [Follow,setFollow] = useState(false)
   const [number,Setnumber] = useState(0)
-  
+  const [profile,setProfile] = useState()
+  const [loading,setLoading] = useState(true)
   const { id } = useParams();
   
   useEffect(()=>{
      async function GetData(id){
     const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
     setGetData(data)
+    setProfile(data.authorImage)
+    setLoading(false)
   }
   GetData(id)
 },[id])
@@ -32,6 +35,68 @@ function NotFollowed(){
 }
 
 console.log(getdata)
+
+if(loading){
+  return(
+    <div id="wrapper">
+    <div className="no-bottom no-top" id="content">
+      <div id="top"></div>
+
+      <section
+        id="profile_banner"
+        aria-label="section"
+        className="text-light"
+        data-bgimage="url(images/author_banner.jpg) top"
+        style={{ background:"gray"}}
+      ></section>
+
+      <section aria-label="section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="d_profile de-flex">
+                <div className="de-flex-col">
+                  <div className="profile_avatar">
+                  <div className="gray" style={{height:"6rem",width:"6rem",borderRadius:"50%"}}></div>
+
+                    <div className="profile_name">
+                      <h4>
+                      <div className="gray-background-nameauthor" style={{ marginBottom: "1rem",width:"10rem" }}></div>
+
+                      <div className="gray-background-nameauthor" style={{ marginBottom: "1rem",width:"8rem" }}></div>
+                      <div className="gray-background-nameauthor" style={{ marginBottom: "1rem",width:"14rem" }}></div>
+
+                        <button id="btn_copy" title="Copy Text">
+                          Copy
+                        </button>
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="profile_follow de-flex">
+                  <div className="de-flex-col">
+                  <div className="gray-background-nameauthor" style={{width:"8rem",marginRight:"1rem" }}></div>
+                    
+                    
+                  <div className="gray-background-nameauthor" style={{width:"7rem",height:"3rem",marginRight:"1rem" }}></div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="de_tab tab_simple">
+                <AuthorItems profile={profile}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  )
+}
 
   return (
     <div id="wrapper">
@@ -84,7 +149,7 @@ console.log(getdata)
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems profile={profile}/>
                 </div>
               </div>
             </div>
